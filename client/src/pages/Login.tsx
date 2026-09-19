@@ -173,140 +173,142 @@ export default function Login() {
       {/* ── Right Panel ─────────────────────────────────── */}
       <div className="flex-1 bg-holst-cream flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          {/* Tabs */}
-          <div className="flex gap-8 mb-10">
-            <button
-              onClick={() => setActiveTab('signin')}
-              className={`font-display text-2xl tracking-wide transition-colors pb-1 ${
-                activeTab === 'signin'
-                  ? 'text-holst-navy-900 font-bold border-b-2 border-holst-blue'
-                  : 'text-holst-navy-900/40 font-medium hover:text-holst-navy-900/60'
-              }`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => setActiveTab('signup')}
-              className={`font-display text-2xl tracking-wide transition-colors pb-1 ${
-                activeTab === 'signup'
-                  ? 'text-holst-navy-900 font-bold border-b-2 border-holst-blue'
-                  : 'text-holst-navy-900/40 font-medium hover:text-holst-navy-900/60'
-              }`}
-            >
-              Sign Up
-            </button>
+          <div className="neu-lg p-8">
+            {/* Tabs */}
+            <div className="flex gap-8 mb-10">
+              <button
+                onClick={() => setActiveTab('signin')}
+                className={`font-display text-2xl tracking-wide transition-colors pb-1 ${
+                  activeTab === 'signin'
+                    ? 'text-holst-navy-900 font-bold border-b-2 border-holst-blue'
+                    : 'text-holst-navy-900/40 font-medium hover:text-holst-navy-900/60'
+                }`}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => setActiveTab('signup')}
+                className={`font-display text-2xl tracking-wide transition-colors pb-1 ${
+                  activeTab === 'signup'
+                    ? 'text-holst-navy-900 font-bold border-b-2 border-holst-blue'
+                    : 'text-holst-navy-900/40 font-medium hover:text-holst-navy-900/60'
+                }`}
+              >
+                Sign Up
+              </button>
+            </div>
+
+            {/* ── Login Form ───────────────────────────────── */}
+            {activeTab === 'signin' && (
+              <form onSubmit={handleSignIn} className="space-y-6">
+                <div>
+                  <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={signInEmail}
+                    onChange={(e) => setSignInEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    value={signInPassword}
+                    onChange={(e) => setSignInPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={signInLoading}
+                  className="btn-neu w-full py-4 rounded-xl bg-gradient-to-r from-holst-blue to-holst-navy-800 text-white font-display font-semibold tracking-wider text-sm uppercase hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {signInLoading ? 'Signing in...' : 'Login'}
+                </button>
+              </form>
+            )}
+
+            {/* ── Sign Up Form ─────────────────────────────── */}
+            {activeTab === 'signup' && (
+              <form onSubmit={handleSignUp} className="space-y-5">
+                <div>
+                  <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    value={signUpName}
+                    onChange={(e) => setSignUpName(e.target.value)}
+                    placeholder="John Doe"
+                    className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={signUpEmail}
+                    onChange={(e) => setSignUpEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    value={signUpPassword}
+                    onChange={(e) => setSignUpPassword(e.target.value)}
+                    placeholder="At least 6 characters"
+                    className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    value={signUpConfirm}
+                    onChange={(e) => setSignUpConfirm(e.target.value)}
+                    placeholder="Re-enter your password"
+                    className={`input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm ${
+                      signUpConfirm && signUpPassword !== signUpConfirm
+                        ? 'ring-2 ring-red-400'
+                        : ''
+                    }`}
+                  />
+                  {signUpConfirm && signUpPassword !== signUpConfirm && (
+                    <p className="mt-1 text-xs text-red-500">Passwords do not match</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={signUpLoading}
+                  className="btn-neu w-full py-4 rounded-xl bg-gradient-to-r from-holst-sage to-holst-navy-800 text-white font-display font-semibold tracking-wider text-sm uppercase hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {signUpLoading ? 'Creating account...' : 'Create Account'}
+                </button>
+              </form>
+            )}
           </div>
-
-          {/* ── Login Form ───────────────────────────────── */}
-          {activeTab === 'signin' && (
-            <form onSubmit={handleSignIn} className="space-y-6">
-              <div>
-                <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={signInEmail}
-                  onChange={(e) => setSignInEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={signInPassword}
-                  onChange={(e) => setSignInPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={signInLoading}
-                className="btn-neu w-full py-4 rounded-xl bg-gradient-to-r from-holst-blue to-holst-navy-800 text-white font-display font-semibold tracking-wider text-sm uppercase hover:opacity-90 transition-opacity disabled:opacity-50"
-              >
-                {signInLoading ? 'Signing in...' : 'Login'}
-              </button>
-            </form>
-          )}
-
-          {/* ── Sign Up Form ─────────────────────────────── */}
-          {activeTab === 'signup' && (
-            <form onSubmit={handleSignUp} className="space-y-5">
-              <div>
-                <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  value={signUpName}
-                  onChange={(e) => setSignUpName(e.target.value)}
-                  placeholder="John Doe"
-                  className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={signUpEmail}
-                  onChange={(e) => setSignUpEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={signUpPassword}
-                  onChange={(e) => setSignUpPassword(e.target.value)}
-                  placeholder="At least 6 characters"
-                  className="input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-holst-navy-900/60 mb-2 uppercase tracking-wider">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  value={signUpConfirm}
-                  onChange={(e) => setSignUpConfirm(e.target.value)}
-                  placeholder="Re-enter your password"
-                  className={`input-neu w-full px-4 py-4 rounded-xl bg-holst-cream text-holst-navy-900 placeholder:text-holst-navy-900/30 focus:outline-none font-body text-sm ${
-                    signUpConfirm && signUpPassword !== signUpConfirm
-                      ? 'ring-2 ring-red-400'
-                      : ''
-                  }`}
-                />
-                {signUpConfirm && signUpPassword !== signUpConfirm && (
-                  <p className="mt-1 text-xs text-red-500">Passwords do not match</p>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                disabled={signUpLoading}
-                className="btn-neu w-full py-4 rounded-xl bg-gradient-to-r from-holst-sage to-holst-navy-800 text-white font-display font-semibold tracking-wider text-sm uppercase hover:opacity-90 transition-opacity disabled:opacity-50"
-              >
-                {signUpLoading ? 'Creating account...' : 'Create Account'}
-              </button>
-            </form>
-          )}
         </div>
       </div>
     </div>
