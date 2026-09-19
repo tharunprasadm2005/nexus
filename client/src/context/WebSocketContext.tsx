@@ -4,7 +4,7 @@ import { useAuth } from './AuthContext';
 import { getAccessToken } from '../services/api';
 import { activityService } from '../services/api.service';
 
-const WS_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : window.location.origin;
+const WS_URL = import.meta.env.VITE_WS_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : window.location.origin);
 
 interface WebSocketContextType {
   socket: Socket | null;
@@ -46,7 +46,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     try {
       const newSocket = io(WS_URL, {
         auth: { token },
-        transports: ['websocket', 'polling'],
+        transports: ['websocket'],
         reconnection: true,
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,

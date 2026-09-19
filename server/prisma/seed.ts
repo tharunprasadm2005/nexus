@@ -8,6 +8,10 @@ async function hashPassword(password: string): Promise<string> {
 }
 
 async function main() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Seed script cannot be run in production');
+  }
+
   console.log('Seeding database...');
 
   await prisma.activityLog.deleteMany();

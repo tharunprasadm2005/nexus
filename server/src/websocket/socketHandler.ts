@@ -20,6 +20,7 @@ export function setupWebSocket(server: HTTPServer) {
       origin: env.CORS_ORIGIN,
       credentials: true,
     },
+    transports: ['websocket'],
   });
   ioInstance = io;
 

@@ -150,7 +150,7 @@ Socket.io was chosen over native WebSocket for several reasons:
 1. **Room-based broadcasting**: Each project gets its own room, making it trivial to broadcast task updates only to users viewing that project
 2. **Automatic reconnection**: Built-in reconnection with exponential backoff ensures missed events can be caught up via the `/api/activity/missed` endpoint
 3. **Authentication middleware**: Socket.io supports middleware for verifying JWT tokens on connection
-4. **Fallback support**: Falls back to HTTP long-polling in environments that block WebSocket connections
+4. **WebSocket-only transport**: Configured with `transports: ['websocket']` to comply with WebSocket-only requirements, ensuring pure WebSocket communication without HTTP long-polling fallback
 
 ### Token Storage: HttpOnly Cookie (Refresh) + Memory (Access)
 - **Refresh token**: Stored in HttpOnly, Secure, SameSite=Strict cookie. Immune to XSS attacks since JavaScript cannot access it.
