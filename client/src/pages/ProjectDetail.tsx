@@ -28,7 +28,7 @@ interface Task {
   description: string;
   status: string;
   priority: string;
-  assignee: {
+  assignedTo: {
     id: string;
     name: string;
   };
@@ -382,7 +382,7 @@ export default function ProjectDetail() {
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-holst-navy-800/50">
                       <span className="flex items-center gap-1">
                         <UserIcon size={14} />
-                        {task.assignee?.name || 'Unassigned'}
+                        {task.assignedTo?.name || 'Unassigned'}
                       </span>
                       {task.dueDate && (
                         <span className="flex items-center gap-1 whitespace-nowrap">
