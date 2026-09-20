@@ -21,6 +21,7 @@ interface Task {
   priority: string;
   dueDate: string;
   project: { id: string; name: string };
+  assignedTo: { id: string; name: string; email: string } | null;
 }
 
 const Tasks = () => {
@@ -127,6 +128,9 @@ const Tasks = () => {
                     >
                       {task.project.name}
                     </Link>
+                    <span className={task.assignedTo ? '' : 'italic'}>
+                      {task.assignedTo ? task.assignedTo.name : 'Unassigned'}
+                    </span>
                     {task.dueDate && (
                       <span>Due {new Date(task.dueDate).toLocaleDateString()}</span>
                     )}

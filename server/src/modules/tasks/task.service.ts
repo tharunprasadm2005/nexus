@@ -288,11 +288,13 @@ export class TaskService {
   }
 
   async getMyTasks(user: JwtPayload, filters: TaskFilters) {
-    if (user.role !== Role.DEVELOPER) {
-      throw new ForbiddenError('This endpoint is for developers only');
-    }
+    const where: Prisma.TaskWhereInput = {};
 
-    const where: Prisma.TaskWhereInput = { assignedToId: user.userId };
+    if (user.role === Role.DEVELOPER) {
+      where.assignedToId = user.userId;
+    } else if (user.role === Role.PROJECT_MANAGER) {
+      where.project = { createdById: user.userId };
+    }
 
     if (filters.status) where.status = filters.status;
     if (filters.priority) where.priority = filters.priority;
